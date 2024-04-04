@@ -1,5 +1,5 @@
 #include<iostream>
-using namespace std ;
+using namespace std;
 class node{
     public:
     int data ;
@@ -11,6 +11,9 @@ class node{
     node (int data){
         this->data=data;
         this->next=NULL;
+    }
+    ~node(){
+        cout<<"Syatum"<<this->data<<endl;
     }
 };
 void inserthead(node* &head,node* &tail ,int data){
@@ -31,7 +34,6 @@ void inserthead(node* &head,node* &tail ,int data){
     head=newdata;
 }
 }
-
 void inserttail(node* &head,node* &tail,int data){
          if(tail == NULL ){
         //step 1 : create a node ;
@@ -67,40 +69,61 @@ int getlength (node* head){
     return length;
 }
 
-void insertatanyposition(node* &head ,node* &tail ,int data,int position ){
-    int Length = getlength(head);
-    if(position <= 1){
-        inserthead(head,tail,data);
+void deletnode(node* &head ,node* tail , int position){
+    if(head == NULL){
+        cout<<"Cannot delete ,coz LL is empty";
+        return;
     }
-    else if(position >= Length + 1){
-        inserttail(head,tail,data);
+    int len = getlength(head);
+    if(position == 1){
+        // first node ko delete krna hai 
+        node* temp = head;
+        head =head->next;
+        temp->next=NULL;
+        delete temp;
     }
+    else if(position == len){
+//   last node delete keni hai 
+     node* prev = head;
+     while(prev->next == tail){
+        prev=prev->next;
+     }
+    //  jb prev last pe aah jaye  
+    // ab prev ka next null kr
+    prev->next=NULL;
+        // or ab node delete kro 
+        delete tail;
+
+        //update tail
+        tail=prev;  
+    }
+
     else{
-        // insert at middle of linklist
-        // create a new node 
-        node* newnode= new node(data);
-        // step 2
         node* prev = NULL;
-        node* curr =head;
-        while(position !=1){
+        node* curr = head;
+        while(position != 1){
             position--;
             prev=curr;
             curr=curr->next;
         }
-        // step3 
-        prev->next=newnode;
-        newnode->next=curr; 
+        prev->next=curr->next;
+        curr->next=NULL;
+        delete curr;
     }
-
+    
 }
-int main(){
- node* head = NULL;
+
+int main (){
+// sab kuch new se 
+node* head = NULL;
 node* tail =NULL;
 inserthead(head,tail,10);
 inserthead(head,tail,20);
 inserthead(head,tail,30);
-insertatanyposition(head,tail,500,3);
+inserttail(head,tail,30);
+inserttail(head,tail,20);
+inserttail(head,tail,10);
+deletnode(head,tail,5);
 printLL(head);
-
 
 }

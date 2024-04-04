@@ -93,14 +93,63 @@ void insertatanyposition(node* &head ,node* &tail ,int data,int position ){
     }
 
 }
+
+// reverse the  linkedlist
+node* reverse(node* &head){
+    node* prev=NULL;
+    node* curr=head;
+    // node* temp= head;
+    while(curr != NULL){
+            node* next = curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+            }
+            head=prev;  
+            return head;
+              } 
+
+void addcarry(node* &head){
+    head =reverse(head);
+    node* temp =head;
+    int carry=1;
+    while(temp !=NULL){
+        
+        int totalsum= temp->data+carry;
+        int digit =  totalsum % 10;
+         carry = totalsum /10;
+        if(carry == 0){
+            temp->data=digit;
+            temp=temp->next;
+
+        }
+    }
+    if(carry != 0){
+        int totalsum= temp->data+carry;
+        int digit =  totalsum % 10;
+        int carry = totalsum /10;
+        node* newnode=new node(carry);
+        temp->next=newnode;
+
+    }
+    head=reverse(head); 
+
+}              
 int main(){
  node* head = NULL;
 node* tail =NULL;
-inserthead(head,tail,10);
-inserthead(head,tail,20);
-inserthead(head,tail,30);
-insertatanyposition(head,tail,500,3);
+inserthead(head,tail,1);
+inserthead(head,tail,2);
+inserthead(head,tail,3);
+inserthead(head,tail,4);
+inserthead(head,tail,5);
+// insertatanyposition(head,tail,500,3);
+printLL(head);
+// everse(head,tail);
+addcarry(head);
 printLL(head);
 
 
+
 }
+
