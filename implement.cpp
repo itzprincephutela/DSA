@@ -34,8 +34,6 @@
 //     root->right=createtree();
 //     return root;
 //     }
-
-
 // int main(){
 //     node* root  = createtree();
 //     cout<<root->data<<endl;
@@ -52,7 +50,7 @@ class node{
     node(int val){
         this->data=val;
         this->left=NULL;
-        this->right=NULL;
+        this->right=NULL;    
     }
 
 };
@@ -104,22 +102,48 @@ void postorder(node* root){
    
 }
 
-void levelorder(node* root){
-    queue<node*>q; 
-    q.push(root);
-    while(!q.empty()){
-        node* front=q.front();
-        q.pop();
-        cout<< front->data <<" " ;
+// void levelorder(node* root){
+//     queue<node*>q; 
+//     q.push(root);
+//     while(!q.empty()){
+//         node* front=q.front();
+//         q.pop();
+//         cout<< front->data <<" " ;
         
-        if(front->left !=NULL){
-            q.push(front->left);
-        }
-        if(front->right !=NULL){
-            q.push(front->right);
+//         if(front->left !=NULL){
+//             q.push(front->left);
+//         }
+//         if(front->right !=NULL){
+//             q.push(front->right);
+//         }
+//     }
+//     }
+void levelorderr(node* root) {
+    if (!root) return;  // Early return if root is null
+
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);  // Marker for the end of the current level
+
+    while (q.size() > 1) {  // Continue until the queue only contains the marker
+        node* front = q.front();
+        q.pop();
+
+        if (front == NULL) {
+            cout << endl;  // End of current level
+            q.push(NULL);  // Add marker for next level
+        } else {
+            cout << front->data << " ";
+            if (front->left != NULL) {
+                q.push(front->left);
+            }
+            if (front->right != NULL) {
+                q.push(front->right);
+            }
         }
     }
-    }
+}
+
 int main(){
     node* root=createtree();
     // cout<<root->data;
@@ -136,7 +160,7 @@ int main(){
     cout<<endl;
 
     cout<<"Printing Order  levelorder: "<<endl;
-    levelorder(root);
+    levelorderr(root);
     cout<<endl;
 
 }
