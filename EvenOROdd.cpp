@@ -9,5 +9,5 @@ int main (){
     }
     else{
         cout<<"Odd";
-    }
+    }://
 }!!!//
