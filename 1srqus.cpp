@@ -8,7 +8,7 @@
 //     while(start<=end){
 //         if(arr[mid]==key)
 //         return mid;
-
+//
 //     if(key>arr[mid]){
 //         start=mid+1;
 //     }
