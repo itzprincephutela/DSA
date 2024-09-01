@@ -1,6 +1,6 @@
 // normal binarySearch
 // #include<iostream>
-// using namespace std;
+// using namespace std;!
 // int binarySeacrh(int arr[],int size ,int key){
 //     int start =0;
 //     int end=size-1;
