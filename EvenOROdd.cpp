@@ -6,7 +6,8 @@ int main (){
     
     if(num%2==0){
         cout<<"Even";
-    }
+    }:
+        
     else{
         cout<<"Odd";
     }://
