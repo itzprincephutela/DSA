@@ -11,7 +11,7 @@
 //
 //     if(key>arr[mid]){
 //         start=mid+1;
-//     }
+//     }!!
 //     else{
 //         end=mid-1;
 //     }
